@@ -7,14 +7,14 @@ export default function HeroSection() {
   return (
     <Box
       sx={{
-        display: "flex", // coloca texto e imagem lado a lado
-        alignItems: "center", // alinha verticalmente
-        justifyContent: "space-between", // separa texto e imagem
-        padding: "50px",
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" }, // 🔥 chave
+        alignItems: "center",
+        justifyContent: "space-between",
+        px: { xs: 2, sm: 4, md: 6 }, // padding responsivo
+        py: { xs: 6, md: 10 },
         background: "linear-gradient(to bottom, #136c34, #c8ddd0)",
-        flexWrap: "wrap", // mantém responsivo
-        // marginTop: "1rem",
-        // borderRadius: "15px",
+        gap: { xs: 4, md: 0 },
       }}
     >
       {/* TEXTO E BOTÕES */}
@@ -68,7 +68,7 @@ export default function HeroSection() {
         alt="App Preview"
         sx={{
           flex: "1 1 40%",
-          maxWidth: "500px",
+          maxWidth: "330px",
           borderRadius: "20px",
           marginTop: { xs: "40px", md: "0" },
         }}
