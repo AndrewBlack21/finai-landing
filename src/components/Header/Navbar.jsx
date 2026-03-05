@@ -7,19 +7,14 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import Stack from "@mui/material/Stack";
+import { TrendingUp } from "lucide-react";
 
-const pages = ["Recursos", "Agente Ai", "Depoimentos"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Recursos", "Agente IA", "Depoimentos"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -29,102 +24,137 @@ function Navbar() {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
     <AppBar
-      position="static"
+      position="sticky"
+      elevation={0}
       sx={{
-        backgroundColor: "#d0e2d6",
-        color: "#000", // Seu tom de verde escuro
+        backgroundColor: "rgba(240, 248, 243, 0.92)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(42, 214, 106, 0.15)",
+        color: "#1a2e22",
+        top: 0,
+        zIndex: 1100,
       }}
     >
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
+        <Toolbar disableGutters sx={{ minHeight: { xs: "60px", md: "68px" } }}>
+          {/* Logo desktop */}
+          <Box
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="#"
             sx={{
-              mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
+              alignItems: "center",
+              gap: 1,
               textDecoration: "none",
+              mr: 4,
             }}
           >
-            FinAi
-          </Typography>
+            <Box
+              sx={{
+                width: 34,
+                height: 34,
+                background: "linear-gradient(135deg, #1ea360, #2ad66a)",
+                borderRadius: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 2px 8px rgba(42,214,106,0.35)",
+              }}
+            >
+              <TrendingUp size={18} color="#fff" strokeWidth={2.5} />
+            </Box>
+            <Typography
+              sx={{
+                fontFamily: "'Syne', 'DM Sans', sans-serif",
+                fontWeight: 800,
+                fontSize: "1.25rem",
+                color: "#1a2e22",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Fin<span style={{ color: "#1ea360" }}>AI</span>
+            </Typography>
+          </Box>
 
+          {/* Mobile menu button */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="menu"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              sx={{ color: "#1a2e22" }}
             >
               <MenuIcon />
             </IconButton>
-
-            {/* Link da pagina */}
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
+              anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
               keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
+              transformOrigin={{ vertical: "top", horizontal: "left" }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                  <Typography sx={{ textAlign: "center", fontWeight: 600 }}>
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
 
-          <Typography
-            variant="h5"
-            noWrap
+          {/* Logo mobile */}
+          <Box
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="#"
             sx={{
-              mr: 2,
               display: { xs: "flex", md: "none" },
+              alignItems: "center",
+              gap: 1,
               flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
               textDecoration: "none",
             }}
           >
-            FinAI
-          </Typography>
-          {/* ATUALIZA A BOX PARA FLEX-END */}
+            <Box
+              sx={{
+                width: 30,
+                height: 30,
+                background: "linear-gradient(135deg, #1ea360, #2ad66a)",
+                borderRadius: "8px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <TrendingUp size={15} color="#fff" strokeWidth={2.5} />
+            </Box>
+            <Typography
+              sx={{
+                fontFamily: "'Syne', 'DM Sans', sans-serif",
+                fontWeight: 800,
+                fontSize: "1.1rem",
+                color: "#1a2e22",
+              }}
+            >
+              Fin<span style={{ color: "#1ea360" }}>AI</span>
+            </Typography>
+          </Box>
+
+          {/* Nav links + CTA */}
           <Box
             sx={{
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
-              justifyContent: "flex-end", // <-- ADICIONE ESTA LINHA
+              justifyContent: "flex-end",
               alignItems: "center",
+              gap: 0.5,
             }}
           >
             {pages.map((page) => (
@@ -132,13 +162,16 @@ function Navbar() {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{
-                  my: 2,
                   color: "#395242",
-                  display: "block",
                   fontWeight: 600,
+                  fontSize: "0.875rem",
+                  px: 2,
+                  borderRadius: "8px",
                   "&:hover": {
-                    color: "#2ad66a",
+                    color: "#1ea360",
+                    backgroundColor: "rgba(42,214,106,0.08)",
                   },
+                  transition: "all 0.2s",
                 }}
               >
                 {page}
@@ -146,51 +179,30 @@ function Navbar() {
             ))}
             <Button
               sx={{
-                background: "#2ad66a",
-                color: "#000",
-                borderRadius: "0.5rem",
-
-                height: "40px",
+                ml: 2,
+                background: "linear-gradient(135deg, #1ea360, #2ad66a)",
+                color: "#fff",
+                fontWeight: 700,
+                fontSize: "0.875rem",
+                borderRadius: "10px",
+                px: 3,
+                py: 1,
+                boxShadow: "0 2px 10px rgba(42,214,106,0.3)",
                 "&:hover": {
-                  backgroundColor: "#2ad66a",
-                  scale: 1.1,
+                  background: "linear-gradient(135deg, #178550, #1ea360)",
+                  boxShadow: "0 4px 16px rgba(42,214,106,0.45)",
+                  transform: "translateY(-1px)",
                 },
+                transition: "all 0.2s",
               }}
             >
-              Baixar Agora
+              Entrar na Lista
             </Button>
-          </Box>
-
-          {/* Menu de Hamburgue */}
-          <Box sx={{ flexGrow: 0 }}>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: "center" }}>
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
+
 export default Navbar;
